@@ -1,0 +1,47 @@
+# this is a sample customized values.yaml
+persistence:
+  useDynamicProvisioning: true
+
+imagePullPolicy: IfNotPresent
+
+kafka:
+  bootstrapServers: "kafka-release-cp-kafka-headless:9092"
+  securityProtocol: "PLAINTEXT"
+
+elasticsearch:
+  install: true
+
+settings:
+  egress: false
+  ingressTopic: bai-release-ingress
+  serviceTopic: bai-release-service
+
+
+admin:
+  replicas: 1
+  serviceType: NodePort
+  externalPort: 31100
+
+# we don't install ICM
+icm:
+  install: false
+
+# we don't install ODM
+odm:
+  install: false
+
+# which means only BPMN and raw ingestion are installed
+
+ibm-dba-ek:
+  elasticsearch:
+    data:
+      storage:
+        persistent: true
+        useDynamicProvisioning: true
+        storageClass: "bai-ek-data"
+      client:
+        serviceType: NodePort
+        externalPort: 31200
+  kibana:
+    serviceType: NodePort
+    externalPort: 31501
